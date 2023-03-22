@@ -36,6 +36,8 @@ const timer = function(userInputSanitizer) {
   const times = userInputSanitizer();
   console.log(`timer() function: ${times}`);
 
+
+
 };
 
 
@@ -50,16 +52,16 @@ const userInputSanitizer = function() {
 
   // Tries to convert the raw input into Numbers. Non-numbers are filtered out. 
   // (Can also be done with parseInt`).
-  const NumberArray = rawInput.filter(e => Number(e));
+  const numberArray = rawInput.filter(e => Number(e));
 
   // Converts the Numbers into Integers by truncating Floating-point values:
-  const IntegerArray = NumberArray.map(e => Math.trunc(e));
+  const integerArray = numberArray.map(e => Math.trunc(e));
 
   // Filters out Integers smaller than 0.
-  const NaturalNumberArray = IntegerArray.filter(e => e > 0);
+  const naturalNumberArray = integerArray.filter(e => e > 0);
 
 
-  return NaturalNumberArray;
+  return naturalNumberArray;
 }
 
 
