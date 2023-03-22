@@ -36,19 +36,30 @@ const timer = function(userInputSanitizer) {
   // Call `userInputSanitizer` to sanitize data and return alarm times in 
   // milliseconds.
   const alarmTimesArray = userInputSanitizer();
-  console.log(`timer() function: ${alarmTimesArray}`);
+  // console.log(`timer() function: ${alarmTimesArray}`);
 
 
-  // Iterate over the alarms...
-  for (const alarm of alarmTimesArray) {
+  // Check if there are any alarms in the array. If not, issue notice and exit
+  // the application.
+  if (alarmTimesArray.length === 0) {
     
-    // ... and set alarm times:
-    setTimeout(() => {
+    console.log("No valid integers were entered! No alarms were set!");
 
-      // System beeps don't work on my system, so here is a visual alarm:
-      console.log(`This is the ${alarm} millisecond alarm!`);
+  // If valid times are available, set alarms.
+  } else {
 
-    }, alarm);
+    // Iterate over the alarms...
+    for (const alarm of alarmTimesArray) {
+      
+      // ... and set alarm times:
+      setTimeout(() => {
+
+        // System beeps don't work on my system, so here is a visual alarm:
+        console.log(`This is the ${alarm} millisecond alarm!`);
+
+      }, alarm);
+
+    }
 
   }
 
