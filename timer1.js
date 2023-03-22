@@ -28,22 +28,39 @@
 
 // TIMER IMPLEMENTATION
 // 
-// This function takes input from the command line in the form of positive 
-// integers. These integers represent seconds until an alarm is to be played.
-// `timer` takes these inputs and plays an alarm after x seconds have passed.
+// This function takes a callback function which returns times in milliseconds.
+// These times represent alarm times in the future; `timer` sets alarms and 
+// plays an alarm when the specified time is reached.
 const timer = function(userInputSanitizer) {
 
+  // Call `userInputSanitizer` to sanitize data and return alarm times in 
+  // milliseconds.
   const alarmTimesArray = userInputSanitizer();
   console.log(`timer() function: ${alarmTimesArray}`);
 
 
+  // Iterate over the alarms...
+  for (const alarm of alarmTimesArray) {
+    
+    // ... and set alarm times:
+    setTimeout(() => {
+
+      // System beeps don't work on my system, so here is a visual alarm:
+      console.log(`This is the ${alarm} millisecond alarm!`);
+
+    }, alarm);
+
+  }
 
 };
 
 
 
-// This function collects user input from the command line, sanitizes it, 
-// converts it in milliseconds and returns it to the caller.
+// USER INPUT SANITIZER
+// 
+// This predicate function takes input from the command line and filters it 
+// for positive integers. It converts them into milliseconds and returns it to 
+// the caller.
 const userInputSanitizer = function() {
 
   // Call the command line and extract all the input, minus Node's 
