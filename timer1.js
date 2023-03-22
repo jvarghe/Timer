@@ -33,8 +33,8 @@
 // `timer` takes these inputs and plays an alarm after x seconds have passed.
 const timer = function(userInputSanitizer) {
 
-  const times = userInputSanitizer();
-  console.log(`timer() function: ${times}`);
+  const alarmTimesArray = userInputSanitizer();
+  console.log(`timer() function: ${alarmTimesArray}`);
 
 
 
@@ -42,8 +42,8 @@ const timer = function(userInputSanitizer) {
 
 
 
-// This function collects user input from the command line, sanitizes it and
-// returns it to the caller.
+// This function collects user input from the command line, sanitizes it, 
+// converts it in milliseconds and returns it to the caller.
 const userInputSanitizer = function() {
 
   // Call the command line and extract all the input, minus Node's 
@@ -54,14 +54,17 @@ const userInputSanitizer = function() {
   // (Can also be done with parseInt`).
   const numberArray = rawInput.filter(e => Number(e));
 
-  // Converts the Numbers into Integers by truncating Floating-point values:
+  // Converts the Numbers into Integers by truncating floating-point values:
   const integerArray = numberArray.map(e => Math.trunc(e));
 
   // Filters out Integers smaller than 0.
   const naturalNumberArray = integerArray.filter(e => e > 0);
 
+  // Denominate the Natural Numbers in milliseconds:
+  const timesArray = naturalNumberArray.map(e => e * 1000);
 
-  return naturalNumberArray;
+
+  return timesArray;
 }
 
 
